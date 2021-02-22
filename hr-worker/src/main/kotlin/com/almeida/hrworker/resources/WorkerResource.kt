@@ -2,6 +2,9 @@ package com.almeida.hrworker.resources
 
 import com.almeida.hrworker.entities.Worker
 import com.almeida.hrworker.repositories.WorkerRepository
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.env.Environment
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,6 +16,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/workers")
 class WorkerResource(val workerRepository: WorkerRepository) {
 
+    companion object {
+        val logger: org.slf4j.Logger = LoggerFactory.getLogger(WorkerResource::class.java)
+    }
+
+    @Autowired
+    lateinit var environment: Environment
+
     @GetMapping
     fun findAll(): ResponseEntity<List<Worker>> {
         return ResponseEntity(
@@ -23,6 +33,7 @@ class WorkerResource(val workerRepository: WorkerRepository) {
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long): ResponseEntity<Worker> {
+        logger.info("PORT = ${environment.getProperty("local.server.port")}")
         val worker = workerRepository.findById(id).get()
         return ResponseEntity(
             worker,
