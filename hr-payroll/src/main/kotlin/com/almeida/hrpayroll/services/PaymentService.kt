@@ -1,11 +1,8 @@
 package com.almeida.hrpayroll.services
 
 import com.almeida.hrpayroll.entities.Payment
-import com.almeida.hrpayroll.entities.Worker
 import com.almeida.hrpayroll.feignclients.WorkerFeignClient
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import org.springframework.web.client.RestTemplate
 import java.lang.Exception
 
 @Service
