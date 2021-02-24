@@ -1,13 +1,19 @@
 package com.almeida.hroauth.config
 
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.cloud.context.config.annotation.RefreshScope
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
 
+@RefreshScope
 @Configuration
 class AppConfig {
+
+    @Value("\${jwt.secret}")
+    lateinit var jwtSecret: String
 
     @Bean
     fun bCryptPasswordEncoder() : BCryptPasswordEncoder {
@@ -17,7 +23,7 @@ class AppConfig {
     @Bean
     fun accessTokenConverter() : JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()
-        converter.setSigningKey("hahaha")
+        converter.setSigningKey(jwtSecret)
         return converter
     }
 
