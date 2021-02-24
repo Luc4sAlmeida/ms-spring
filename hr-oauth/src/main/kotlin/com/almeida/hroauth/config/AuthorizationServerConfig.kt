@@ -1,9 +1,7 @@
 package com.almeida.hroauth.config
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.annotation.Order
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
@@ -15,7 +13,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
 
 @Configuration
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
 @EnableAuthorizationServer
 class AuthorizationServerConfig : AuthorizationServerConfigurerAdapter() {
 
