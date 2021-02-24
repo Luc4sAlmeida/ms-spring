@@ -10,6 +10,8 @@ data class UserEntity(
     @Id    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
     var name: String,
+
+    @Column(unique = true)
     var email: String,
     var password: String,
 
