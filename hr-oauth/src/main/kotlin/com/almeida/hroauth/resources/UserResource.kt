@@ -18,7 +18,7 @@ class UserResource {
 
     @GetMapping("/search")
     fun findByEmail(email: String) : ResponseEntity<UserEntity> {
-        val user  = userService.findByEmail(email)
-        return ResponseEntity(user, HttpStatus.OK)
+        val user  = userService.loadUserByUsername(email)
+        return ResponseEntity(user as UserEntity, HttpStatus.OK)
     }
 }
